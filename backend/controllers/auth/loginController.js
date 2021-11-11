@@ -18,6 +18,7 @@ const loginController = {
             return next(error);
         } 
 
+        
         try {
             const user = await User.findOne({ email: req.body.email });
             if (!user) {
@@ -35,7 +36,6 @@ const loginController = {
         } catch (error) {
             return next(error)
         }
-
     },
 
     async logout(req,res,next){

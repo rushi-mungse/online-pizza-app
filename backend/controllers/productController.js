@@ -22,7 +22,7 @@ const productController = {
             if (err) {
                 return next(CustomErrorHanler.serverError(err.message));
             }
-            const filePath = req.file.path.replace('\\','/');
+            const filePath = req.file.path.replace('\\', '/');
 
             // console.log(req.file);
             // console.log(`${appRoot}/${filePath}`);
@@ -103,7 +103,7 @@ const productController = {
             }
             res.status(201).json(document);
         }
-        ) 
+        )
     },
     async destroy(req, res, next) {
         const document = await Products.findOneAndRemove({ _id: req.params.id })
@@ -128,16 +128,29 @@ const productController = {
         }
         res.json(documents);
     },
-    async show(req,res,next){
+    async show(req, res, next) {
         let document;
         try {
-            document=await Products.findOne({_id:req.params.id}).select('-updateAt -__v');
+            document = await Products.findOne({ _id: req.params.id }).select('-updateAt -__v');
 
         } catch (error) {
             return next(CustomErrorHanler.serverError());
         }
         res.json(document)
+    },
+    async getProducts(req, res, next) {
+        let document;
+        try {
+            document = await Products.find({
+                _id: { $in: req.body.ids }
+            })
+
+        } catch (error) {
+            return next(new Error('SOmething went wrong!!'))
+        }
+        res.json(document)
     }
+
 }
 
 

@@ -11,6 +11,7 @@ router.get('/api/me',auth, userController.me);
 router.post('/api/refresh', refreshController.refresh);
 router.post('/api/logout',auth, loginController.logout);
 
+router.post('/api/products/cart-items',productController.getProducts)
 router.post('/api/products',[auth,admin], productController.store);
 router.put('/api/products/:id',[auth,admin], productController.update);
 router.delete('/api/products/:id',[auth,admin], productController.destroy);

@@ -12,7 +12,7 @@ const registerController = {
             name: Joi.string().min(3).max(30).required(),
             email: Joi.string().email().required(),
             password: Joi.string().pattern(RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-            repeat_password: Joi.ref('password')
+            repeat_password: Joi.ref('password') 
         })
         const { error } = registerSchema.validate(req.body);
 

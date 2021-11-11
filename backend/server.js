@@ -5,7 +5,15 @@ import errorHandler from './middlewares/errorHandler';
 import DbConnected from './database';
 import path from 'path'
 
+import cors from 'cors'
+
 const app = express();
+
+const corsOption={
+    credentials: true,
+    origin:['http://localhost:3000']
+}
+app.use(cors(corsOption))
 global.appRoot=path.resolve(__dirname);
 
 app.use(express.urlencoded({extended:false}));
